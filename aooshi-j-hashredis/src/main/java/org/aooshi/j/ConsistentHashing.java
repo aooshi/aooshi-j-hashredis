@@ -12,7 +12,7 @@ import java.util.TreeMap;
  * 一致性哈希
  */
 @Slf4j
-public class ConsistentHashing<T> {
+class ConsistentHashing<T> {
 
     private SortedMap<Integer, T> nodeMap = new TreeMap<Integer, T>();
 

@@ -1,7 +1,5 @@
 package org.aooshi.j;
 
-import csdb.commons.hashing.ConsistentHashing;
-import csdb.runtime.utils.SpringContextUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -25,8 +23,8 @@ public class HashRedis {
 
     private ConsistentHashing<JedisPool> hashing;
 
-    public HashRedis() {
-        this.redisConfig = SpringContextUtil.getBean(HashRedisConfig.class);
+    public HashRedis(HashRedisConfig hashRedisConfig) {
+        this.redisConfig = hashRedisConfig;
         this.configItems = this.redisConfig.getServers().toArray(new HashRedisConfigItem[0]);
         this.cfg_configItems = this.redisConfig.getServers().toArray(new HashRedisConfigItem[0]);
         this.configTag = this.buildCheckTag(this.redisConfig.getServers());
@@ -89,7 +87,9 @@ public class HashRedis {
         Long deleted = 0L;
         try {
             Jedis jedis = new Jedis(item.getHost(), item.getPort(), 1500, 1000);
-            jedis.auth(item.getPassword());
+            if (item.getPassword() != null && item.getPassword() != "") {
+                jedis.auth(item.getPassword());
+            }
             jedis.select(item.getDatabase());
             jedis.set(k, ".");
             deleted = jedis.del(k, ".");
@@ -101,12 +101,15 @@ public class HashRedis {
     }
 
     private void reset() {
+        this.hashing = new ConsistentHashing<>(new JedisPool[0]);
         JedisPool[] nodes = this.createNodes();
         if (nodes == null || nodes.length == 0) {
             return;
         }
         this.hashing = new ConsistentHashing<>(nodes);
-        this.hashing.printNodes();
+        if (this.redisConfig.getEnablePrint() == 1) {
+            this.hashing.printNodes();
+        }
     }
 
     private JedisPool[] createNodes() {
