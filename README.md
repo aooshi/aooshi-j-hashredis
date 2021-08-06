@@ -8,7 +8,7 @@ the project is a consistent hashing redis client
 use project your application  
 应用项目到你的应用程序
 
-### setp 1. import package
+### step 1. import package
 
 pom.xml
 ```xml
@@ -19,7 +19,7 @@ pom.xml
 </dependency>
 ```
 
-### setp 2. configuration application.yml
+### step 2. configuration application.yml
 
 ```yaml
 hashredis:
@@ -46,7 +46,7 @@ hashredis:
 
 ```
 
-### setp 3. configuration bean
+### step 3. configuration bean
 
 ```java
 import org.aooshi.j.HashRedisConfig;
