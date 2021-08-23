@@ -83,21 +83,31 @@ public class HashRedis {
     }
 
     private boolean check(HashRedisConfigItem item) {
-        String k = "_hashredis_server_check";
-        Long deleted = 0L;
+        boolean deleted = false;
+        Jedis jedis = null;
         try {
-            Jedis jedis = new Jedis(item.getHost(), item.getPort(), 1500, 1000);
+            jedis = new Jedis(item.getHost(), item.getPort(), 1500, 1000);
             if (item.getPassword() != null && item.getPassword() != "") {
                 jedis.auth(item.getPassword());
             }
-            jedis.select(item.getDatabase());
-            jedis.set(k, ".");
-            deleted = jedis.del(k, ".");
+            jedis.ping();
+            deleted = "PONG".equals(jedis.ping());
         } catch (Exception e) {
-            // e.printStackTrace();
-            deleted = 0L;
+            deleted = false;
+        } finally {
+            if (jedis != null) {
+                try {
+                    jedis.close();
+                } catch (Exception e2) {
+                }
+            }
         }
-        return deleted == 1L;
+
+        if (deleted == false) {
+            log.info("ping " + item.getHost() + ":" + item.getPort() + " failure.");
+        }
+
+        return deleted;
     }
 
     private void reset() {
