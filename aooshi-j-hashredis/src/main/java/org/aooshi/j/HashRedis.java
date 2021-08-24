@@ -126,7 +126,7 @@ public class HashRedis {
         HashRedisConfigItem[] configItems = this.configItems;
         JedisPool[] pools = new JedisPool[configItems.length];
         for (int i = 0; i < configItems.length; i++) {
-            pools[i] = new HashRedisWorker(configItems[i]);
+            pools[i] = new HashRedisWorker(this.redisConfig, configItems[i]);
         }
         return pools;
     }
