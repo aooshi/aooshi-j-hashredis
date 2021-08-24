@@ -90,8 +90,8 @@ public class HashRedis {
             if (item.getPassword() != null && item.getPassword() != "") {
                 jedis.auth(item.getPassword());
             }
-            jedis.ping();
-            deleted = "PONG".equals(jedis.ping());
+            String r = jedis.ping();
+            deleted = "PONG".equals(r);
         } catch (Exception e) {
             deleted = false;
         } finally {
