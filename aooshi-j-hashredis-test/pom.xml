@@ -5,7 +5,7 @@
     <parent>
         <artifactId>hashredis</artifactId>
         <groupId>org.aooshi.j</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.aooshi.j</groupId>
             <artifactId>aooshi-j-hashredis</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

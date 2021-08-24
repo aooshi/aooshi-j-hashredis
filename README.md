@@ -23,9 +23,6 @@ pom.xml
 
 ```yaml
 hashredis:
-  # 是否启用节点初始打印
-  # node initial print switch
-  enable-print: 0
   # 节点检查时间周期（秒）
   # node check period (second)
   check-period: 5
@@ -43,6 +40,33 @@ hashredis:
     host: 172.20.1.7
     port: 6379
     # password: 123456
+
+#  # 是否启用节点初始打印
+#  # node initial print switch
+#  enable-print: 0
+
+#  #pool config
+#  pool:
+#    # 资源池中的最大连接数,默认: 1000
+#    max-total: 1000
+#    # 资源池允许的最大空闲连接数,默认： 16
+#    max-idle: 16
+#    # 资源池确保的最少空闲连接数:默认：1
+#    min-idle: 1
+#    # 当资源池用尽后，调用者是否要等待。
+#    # 只有当值为true时，maxWaitMillis才会生效。 默认：true
+#    blockWhenExhausted: true
+#    # 当资源池连接用尽后，调用者的最大等待时间（单位为毫秒）。
+#    # 默认：10000
+#    maxWaitMillis: 10000
+#    # 向资源池借用连接时是否做连接有效性检测（ping）。
+#    # 检测到的无效连接将会被移除。默认： false
+#    testOnBorrow: false
+#    # 向资源池归还连接时是否做连接有效性检测（ping）。
+#    # 检测到无效连接将会被移除。默认： false
+#    testOnReturn: false
+#    # 是否开启JMX监控,默认：true
+#    jmxEnabled: true
 
 ```
 

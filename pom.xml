@@ -7,7 +7,7 @@
     <groupId>org.aooshi.j</groupId>
     <artifactId>hashredis</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <modules>
         <module>aooshi-j-hashredis-test</module>
